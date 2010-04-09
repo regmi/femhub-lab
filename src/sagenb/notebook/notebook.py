@@ -1739,7 +1739,7 @@ def migrate_old_notebook_v1(dir):
     print "*"
     print "*      '%s.sagenb'."%os.path.abspath(dir)
     print "*"
-    print "* Your existing notebook will not be modified in any way."
+    print "* Your existing online lab  will not be modified in any way."
     print "*"
     print "*"*80
     print ""

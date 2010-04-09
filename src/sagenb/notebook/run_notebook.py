@@ -47,7 +47,7 @@ def notebook_setup(self=None):
         os.makedirs(conf_path)
 
     if not cmd_exists('certtool'):
-        raise RuntimeError, "You must install certtool to use the secure notebook server."
+        raise RuntimeError, "You must install certtool to use the secure FEMhub server."
 
     dn = raw_input("Domain name [localhost]: ").strip()
     if dn == '':
@@ -116,7 +116,7 @@ def notebook_setup(self=None):
     # Set permissions on private cert
     os.chmod(private_pem, 0600)
 
-    print "Successfully configured notebook."
+    print "Successfully configured the FEMhub online lab."
 
 def notebook_twisted(self,
              directory   = None,
@@ -147,7 +147,7 @@ def notebook_twisted(self,
     # instead of the interface argument
     if address is not None:
         from warnings import warn
-        message = "Use 'interface' instead of 'address' when calling notebook(...)."
+        message = "Use 'interface' instead of 'address' when calling lab(...)."
         warn(message, DeprecationWarning, stacklevel=3)
         interface = address
              
@@ -166,7 +166,7 @@ def notebook_twisted(self,
 
     if not secure and interface != 'localhost':
         print '*'*70
-        print "WARNING: Running the notebook insecurely not on localhost is dangerous"
+        print "WARNING: Running the online lab insecurely not on localhost is dangerous"
         print "because its possible for people to sniff passwords and gain access to"
         print "your account. Make sure you know what you are doing."
         print '*'*70
@@ -176,8 +176,8 @@ def notebook_twisted(self,
     directory = nb._dir
     conf = os.path.join(directory, 'twistedconf.tac')
     
-    if not quiet:
-        print "The notebook files are stored in:", nb._dir
+#    if not quiet:
+#        print "The notebook files are stored in:", nb._dir
 
     nb.conf()['idle_timeout'] = int(timeout)
     
@@ -221,11 +221,11 @@ def notebook_twisted(self,
         ## Create the config file
         if secure:
             if not os.path.exists(private_pem) or not os.path.exists(public_pem):
-                print "In order to use an SECURE encrypted notebook, you must first run notebook.setup()."
+                print "In order to use an SECURE encrypted online lab, you must first run notebook.setup()."
                 print "Now running notebook.setup()"
                 notebook_setup()
             if not os.path.exists(private_pem) or not os.path.exists(public_pem):
-                print "Failed to setup notebook.  Please try notebook.setup() again manually."
+                print "Failed to setup FEMhub online lab.  Please try notebook.setup() again manually."
             strport = '%s:%s:interface=%s:privateKey=%s:certKey=%s'%(protocol, port, interface, private_pem, public_pem)
         else:
             strport = 'tcp:%s:interface=%s'%(port, interface)
@@ -393,9 +393,9 @@ Please either stop the old server or run the new server in a different directory
                      
     if interface != 'localhost' and not secure:
             print "*"*70
-            print "WARNING: Insecure notebook server listening on external interface."
+            print "WARNING: Insecure FEMhub server listening on external interface."
             print "Unless you are running this via ssh port forwarding, you are"
-            print "**crazy**!  You should run the notebook with the option secure=True."
+            print "**crazy**!  You should run the FEMhub with the option secure=True."
             print "*"*70
 
     port = find_next_available_port(port, port_tries)
@@ -417,7 +417,7 @@ def get_admin_passwd():
     print "Do _not_ choose a stupid password, since anybody who could guess your password"
     print "and connect to your machine could access or delete your files."
     print "NOTE: Only the md5 hash of the password you type is stored by FEMhub."
-    print "You can change your password by typing notebook(reset=True)."
+    print "You can change your password by typing lab(reset=True)."
     print "\n"*2
     while True:
         passwd = getpass.getpass("Enter new password: ")
@@ -431,5 +431,5 @@ def get_admin_passwd():
         else:
             break
 
-    print "Please login to the notebook with the username 'admin' and the above password."
+    print "Please login to the FEMhub online lab with the username 'admin' and the above password."
     return passwd

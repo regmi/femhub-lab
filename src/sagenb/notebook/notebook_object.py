@@ -216,12 +216,12 @@ class NotebookObject:
          ``\\$HOME/.sage``.
     """
     def __call__(self, *args, **kwds):
-        return self.notebook(*args, **kwds)
+        return self.lab(*args, **kwds)
 
-    notebook = run_notebook.notebook_twisted
+    lab = run_notebook.notebook_twisted
     setup    = run_notebook.notebook_setup
 
-notebook = NotebookObject()
+lab = NotebookObject()
 
 
 def inotebook(*args, **kwds):
@@ -229,7 +229,7 @@ def inotebook(*args, **kwds):
     Exactly the same as ``notebook(...)`` but with ``secure=False``.
     """
     kwds['secure'] = False
-    notebook(*args, **kwds)
+    lab(*args, **kwds)
 
 
 def test_notebook(admin_passwd, secure=False, directory=None, port=8050, address='localhost', verbose=False):
@@ -265,7 +265,7 @@ def test_notebook(admin_passwd, secure=False, directory=None, port=8050, address
     nb.set_accounts(False)
     nb.save()
     
-    p = notebook(directory=directory, accounts=True, secure=secure, port=port, address=address, open_viewer=False, fork=True, quiet=True)
+    p = lab(directory=directory, accounts=True, secure=secure, port=port, address=address, open_viewer=False, fork=True, quiet=True)
     p.expect("Starting factory")
     def dispose():
         try:
