@@ -226,7 +226,7 @@ except ImportError:
         return False
 
 try:
-    from sage.misc.viewer import browser
+    from sagenb.misc.viewer import browser
 except ImportError:
     @stub
     def browser():
