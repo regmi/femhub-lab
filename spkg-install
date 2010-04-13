@@ -15,5 +15,16 @@ rm -rf $SAGE_ROOT/local/lib/python2.6/site-packages/sagenb*
 echo "Deleting $SAGE_ROOT/local/lib/python/site-packages/sagenb*"
 rm -rf $SAGE_ROOT/local/lib/python/site-packages/sagenb*
 
+cd ext_packages
+easy_install pytz-2010b.zip
+easy_install zope.i18nmessageid-3.5.0.tar.gz
+easy_install zope.event-3.4.1.tar.gz
+easy_install ClientForm-0.2.10.zip
+easy_install mechanize-0.1.11.zip
+easy_install zope.interface-3.5.3.tar.gz
+easy_install zope.schema-3.6.1.tar.gz
+easy_install zope.testbrowser-3.8.0.tar.gz
+cd ..
+
 cd src
 python setup.py install
