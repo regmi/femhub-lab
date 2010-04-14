@@ -24,9 +24,12 @@ INPUT:
         state_number = {{ worksheet.state_number() }};
         {% if not published %}
 	$(document).ready(function () {
+    // Don't ask for a rename:
+    /*
             if (worksheet_name === "Untitled") {
                 rename_worksheet();
             }
+    */
          });
 	{% endif %}
     </script>
