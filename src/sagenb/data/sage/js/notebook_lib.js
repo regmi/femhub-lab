@@ -4087,7 +4087,7 @@ function do_insert_new_text_cell_before(id, new_id, new_html) {
 function insert_new_cell_after(id, input) {
     /*
     Send a message back to the server requesting that a new cell with
-    the given input be inserted before the cell with given id.
+    the given input be inserted after the cell with given id.
 
     INPUT:
         id -- integer or string; cell id
@@ -4096,6 +4096,22 @@ function insert_new_cell_after(id, input) {
     input = input || '';
     async_request(worksheet_command('new_cell_after'),
                   insert_new_cell_after_callback,
+                  { id: id, input: input });
+}
+
+function insert_new_cell_after_and_evaluate(id, input) {
+    /*
+    Send a message back to the server requesting that a new cell with
+    the given input be inserted after the cell with given id.
+    Evaluates the new cell.
+
+    INPUT:
+        id -- integer or string; cell id
+        input -- string (default: ''); cell input text
+    */
+    input = input || '';
+    async_request(worksheet_command('new_cell_after'),
+                  insert_new_cell_after_and_evaluate_callback,
                   { id: id, input: input });
 }
 
@@ -4137,6 +4153,46 @@ function insert_new_cell_after_callback(status, response_text) {
     // Insert a new cell _after_ a cell.
     do_insert_new_cell_after(id, new_id, new_html);
     jump_to_cell(new_id, 0);
+}
+
+function insert_new_cell_after_and_evaluate_callback(status, response_text) {
+    /*
+    Callback that is called when the server inserts a new cell after a
+    given cell.
+
+    INPUT:
+        status -- string
+        response_text -- string; 'locked' (user is not allowed to
+        insert new cells into this worksheet) OR with the format
+
+            [new_id]SEP[new_html]SEP[id]
+
+            new_id -- new cell's id
+            new_html -- new cell's HTML
+            id -- preceding cell's id
+    */
+    var id, new_html, new_id, X;
+
+    if (status === "failure") {
+        alert("Problem inserting new input cell after current input cell.\n" + response_text);
+        return;
+    }
+    if (response_text === "locked") {
+        alert("Worksheet is locked.  Cannot insert cells.");
+        return;
+    }
+
+    // Extract the input variables that are encoded in the
+    // response_text.
+    X = response_text.split(SEP);
+    new_id = toint(X[0]);
+    new_html = X[1];
+    id = toint(X[2]);
+
+    // Insert a new cell _after_ a cell.
+    do_insert_new_cell_after(id, new_id, new_html);
+    jump_to_cell(new_id, 0);
+    evaluate_cell(new_id, false);
 }
 
 
