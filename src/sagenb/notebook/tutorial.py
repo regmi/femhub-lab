@@ -350,7 +350,12 @@ the "save" command), and get back to where you were quickly.
 
 notebook_help = [
     ('Find Help and Documentation',
-     [('<b>Get Started with FEMhub Web Notebook</b>', 'The best way is to try out simple worksheets that explain elementary methods of numerical analysis.<br><br><b>Step 1:</b> Go to <a href="http://nb.femhub.org/">http://nb.femhub.org/</a> and create an account. This is automatic and fast. Report any problems to femhub@googlegroups.com.<br><br><b>Step 2:</b> Log into the web notebook. Click on "published worksheets". Then click on any link starting with "Num Methods", the simplest one being "Num Methods: Taylor Polynomial".<br><br><b>Step 3:</b> Click on "Edit a Copy" in the upper left corner and wait for the browser response. Scroll down below the first input window and click "Evaluate". This will load the program. Then there are two input windows with two different ways to plot a Taylor polynomial that are self-explanatory.<br><br><b>Step 4:</b> There are multiple other worksheets whose title begins with "Num Methods:". Try them out and give us your feedback!<br><br><b>Step 5:</b> You can try out worksheets starting with "Hermes2D:" that allow you to solve finite element problems via the internet. Feel free to adjust the existing worksheets to fit your own needs. We are working on expanding the possibilities.'),
+     [('<b>Get Started with FEMhub Web Notebook</b>', 'The best way is to try
+     out simple worksheets that explain elementary methods of numerical
+     analysis.<br><br><b>Step 1:</b> Go to <a
+     href="http://nb.femhub.org/">http://nb.femhub.org/</a> and create an
+     account. This is automatic and fast. Report any problems to
+     femhub@googlegroups.com.<br><br><b>Step 2:</b> Log into the online lab. Click on "published worksheets". Then click on any link starting with "Num Methods", the simplest one being "Num Methods: Taylor Polynomial".<br><br><b>Step 3:</b> Click on "Edit a Copy" in the upper left corner and wait for the browser response. Scroll down below the first input window and click "Evaluate". This will load the program. Then there are two input windows with two different ways to plot a Taylor polynomial that are self-explanatory.<br><br><b>Step 4:</b> There are multiple other worksheets whose title begins with "Num Methods:". Try them out and give us your feedback!<br><br><b>Step 5:</b> You can try out worksheets starting with "Hermes2D:" that allow you to solve finite element problems via the internet. Feel free to adjust the existing worksheets to fit your own needs. We are working on expanding the possibilities.'),
       ('Help About',
        'Type ? immediately after the object or function and press tab.'),
       ('Source Code',
