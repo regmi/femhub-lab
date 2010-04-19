@@ -22,7 +22,7 @@ def all_files(dir, lstrip):
 
 code = setup(name = 'sagenb',
       version     = '0.7.5',  # the spkg-dist script assumes single quotes here
-      description = 'The FEMhub Online Lab',
+      description = 'Online Numerical Methods Laboratory',
       license     = 'GNU Public License (GPL) v2+',
       author      = 'hpFEM group at UNR, and William Stein et al.',
       author_email= 'http://groups.google.com/group/femhub',
